@@ -2,8 +2,9 @@ import { injectable, /* inject, */ BindingScope } from '@loopback/core';
 import { HttpErrors } from '@loopback/rest';
 // const SellingPartner = require('amazon-sp-api');
 import { SellingPartner } from 'amazon-sp-api';
-import { registerSchema, validate } from '@hyperjump/json-schema/draft-2020-12';
+// import hyperjump from '@hyperjump/json-schema/draft-2020-12';
 import axios from 'axios';
+// const hyperjump = require('@hyperjump/json-schema/draft-2020-12');
 
 @injectable({ scope: BindingScope.TRANSIENT })
 export class ListingsService {
@@ -96,12 +97,18 @@ export class ListingsService {
         },
       });
 
+      const myAmazonListingObject = {};
+
       // get the schema from the response
       const schemaResource = await axios.get(definitionsProductType.schema.link.resource);
       // const metaSchemaResource = await axios.get(definitionsProductType.schema.metaSchema.link.resource);
 
       // register the schema
       // registerSchema(schemaResource.data);
+
+      // validate the schema
+      // const output = hyperjump.validate(definitionsProductType.schema.link.resource, myAmazonListingObject);
+      // console.log(output);
 
       return [null, schemaResource.data];
     } catch (error) {

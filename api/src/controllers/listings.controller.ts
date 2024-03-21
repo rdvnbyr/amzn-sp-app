@@ -2,7 +2,7 @@
 
 import { inject } from '@loopback/core';
 import { ListingsService } from '../services';
-import { Request, ResponseObject, RestBindings, get, param, put, response } from '@loopback/rest';
+import { Request, RestBindings, get, param, put, response } from '@loopback/rest';
 
 const GET_RES_ONJECT = (title: string) => ({
   'application/json': {
@@ -82,7 +82,7 @@ export class ListingsController {
   })
   async getDefinitionsProductType(@param.query.string('productType') productType: string): Promise<any> {
     const [error, listings] = await this.listingsService.getDefinitionsProductType(productType);
-    if(error) {
+    if (error) {
       return { error };
     }
     return listings;
