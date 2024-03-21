@@ -1,6 +1,8 @@
-import {ApplicationConfig, AmznSpApiApplication} from './application';
+import { ApplicationConfig, AmznSpApiApplication } from './application';
 
 export * from './application';
+const dotenv = require('dotenv');
+dotenv.config();
 
 export async function main(options: ApplicationConfig = {}) {
   const app = new AmznSpApiApplication(options);
@@ -32,7 +34,7 @@ if (require.main === module) {
       },
     },
   };
-  main(config).catch(err => {
+  main(config).catch((err) => {
     console.error('Cannot start the application.', err);
     process.exit(1);
   });
