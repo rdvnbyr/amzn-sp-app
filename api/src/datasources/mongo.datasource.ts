@@ -4,11 +4,11 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'mongo',
   connector: 'mongodb',
-  url: 'mongodb+srv://rdvnbyr:CtF0AoKcm7qkQJuP@cluster0.e7gk5.mongodb.net/amzn-sp?retryWrites=true&w=majority',
+  url: '',
   host: 'localhost',
   port: 27017,
-  user: 'rdvnbyr',
-  password: 'CtF0AoKcm7qkQJuP',
+  user: '',
+  password: '',
   database: 'amzn-sp',
   useNewUrlParser: true
 };
