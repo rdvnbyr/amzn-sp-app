@@ -49,6 +49,7 @@
     "!*/__tests__"
   ],
   "dependencies": {
+    "@hyperjump/json-schema": "^1.7.3",
     "@loopback/authentication": "^11.0.0",
     "@loopback/authentication-jwt": "^0.15.0",
     "@loopback/authorization": "^0.15.0",

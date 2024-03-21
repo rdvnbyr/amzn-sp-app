@@ -3,6 +3,7 @@ import RootLayout from './layouts/RootLayout';
 import AuthLayout from './layouts/AuthLayout';
 import Login from './auth/Login';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,6 +12,9 @@ const router = createBrowserRouter(
       <Route element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
       </Route>
+
+      {/* Error 404 */}
+      <Route path="*" element={<NotFound />} />
     </Route>,
   ),
 );
