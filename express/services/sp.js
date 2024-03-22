@@ -1,16 +1,17 @@
 const SellingPartner = require('amazon-sp-api');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 const writeFile = (fileName, data) => {
   fs.writeFileSync(path.join(path.join(__dirname, '..', 'logs'), fileName), JSON.stringify(data, null, 2));
 };
 
 class SPClient {
-  constructor() {
+  constructor(asin, sellerId) {
     this.marketplaceId = process.env.SP_MARKETPLACE_ID;
-    this.asin = process.env.SP_ASIN_EXAMPLE;
-    this.sellerId = process.env.SP_MERCHANT_TOKEN;
+    this.asin = asin && typeof asin === 'string' && asin.length > 0 ? asin : process.env.SP_ASIN_EXAMPLE;
+    this.sellerId = sellerId && typeof sellerId === 'string' && sellerId.length > 0 ? sellerId : process.env.SP_MERCHANT_TOKEN;
     this.spClient = new SellingPartner({
       region: 'eu',
       refresh_token: process.env.SP_REFRESH_TOKEN,
@@ -56,7 +57,7 @@ class SPClient {
         operation: 'listingsRestrictions.getListingsRestrictions',
         query: {
           marketplaceIds: [this.marketplaceId],
-          asin: this.asin,
+          asin: [this.asin],
           sellerId: this.sellerId,
           conditionType: 'new_new',
         },
@@ -104,13 +105,17 @@ class SPClient {
         productTypes = [...productTypes, ...item.productTypes];
       }
 
-      const [restrictionError, listingsRestrictions] = await this.getListingsRestrictions();
+      const [restrictionError, /* listingsRestrictions */] = await this.getListingsRestrictions();
       if (restrictionError) throw restrictionError;
 
       const [definitionsError, definitionsProductType] = await this.getDefinitionsProductType(productTypes[0].productType);
       if (definitionsError) throw definitionsError;
 
-      return [null, { listingItem, listingsRestrictions, definitionsProductType }];
+      const schemaResource = await axios.get(definitionsProductType.schema.link.resource);
+
+      writeFile('schemaResource.json', schemaResource.data);
+
+      return [null, schemaResource.data];
     } catch (error) {
       return [error, null];
     }

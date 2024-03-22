@@ -15,8 +15,9 @@ const createListing = async (req, res) => {
 
 const searchCatalogItems = async (req, res) => {
   try {
-    const sp = new spClient();
-    const [listingError, listingItem] = await sp.searchCatalogItems();
+    const {asin, sellerId} = req.params;
+    const sp = new spClient(asin, sellerId);
+    const [listingError, listingItem] = await sp.searchCatalogItems(asin);
     if (listingError) throw listingError;
 
     res.status(200).json(listingItem);

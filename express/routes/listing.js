@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
   .post('/createListing', createListing)
-  .get('/searchCatalogItems', searchCatalogItems)
+  .get('/searchCatalogItems/:sellerId/:asin', searchCatalogItems)
   .get('/restrictions', restrictions)
   .get('/definitions', definitions);
 
