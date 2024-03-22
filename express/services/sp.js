@@ -1,7 +1,9 @@
+
 const SellingPartner = require('amazon-sp-api');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+
 
 const writeFile = (fileName, data) => {
   fs.writeFileSync(path.join(path.join(__dirname, '..', 'logs'), fileName), JSON.stringify(data, null, 2));
@@ -113,7 +115,13 @@ class SPClient {
 
       const schemaResource = await axios.get(definitionsProductType.schema.link.resource);
 
-      writeFile('schemaResource.json', schemaResource.data);
+      const requiredFields = schemaResource.required;
+      const properties = schemaResource.properties;
+      const additionalProperties = schemaResource.additionalProperties;
+
+
+
+      // writeFile('schemaResource.json', schemaResource.data);
 
       return [null, schemaResource.data];
     } catch (error) {

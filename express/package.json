@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hyperjump/json-schema": "^1.7.3",
     "amazon-sp-api": "^1.0.6",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
