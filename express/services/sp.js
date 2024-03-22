@@ -115,9 +115,9 @@ class SPClient {
 
       const schemaResource = await axios.get(definitionsProductType.schema.link.resource);
 
-      const requiredFields = schemaResource.required;
-      const properties = schemaResource.properties;
-      const additionalProperties = schemaResource.additionalProperties;
+      // const requiredFields = schemaResource.required;
+      // const properties = schemaResource.properties;
+      // const additionalProperties = schemaResource.additionalProperties;
 
 
 
