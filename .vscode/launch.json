@@ -6,6 +6,13 @@
             "request": "launch",
             "command": "npm run start",
             "cwd": "${workspaceFolder}\\api"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Script /express/: start",
+            "request": "launch",
+            "command": "npm run start",
+            "cwd": "${workspaceFolder}\\express"
         }
     ]
 }

@@ -1,4 +1,4 @@
-import {createBrowserRouter, createRoutesFromElements, Route} from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 import AuthLayout from './layouts/AuthLayout';
 import Login from './auth/Login';
@@ -15,8 +15,8 @@ const router = createBrowserRouter(
 
       {/* Error 404 */}
       <Route path="*" element={<NotFound />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 export default router;

@@ -26,7 +26,7 @@ class SPClient {
     });
   }
 
-  async getListingItems() {
+  async searchCatalogItems() {
     try {
       //TODO: if (getListingItem.items.length > 0), than user must select the which product to use
       const listingItem = await this.spClient.callAPI({
@@ -50,7 +50,7 @@ class SPClient {
     }
   }
 
-  async getListingRestrictions() {
+  async getListingsRestrictions() {
     try {
       const listingsRestrictions = await this.spClient.callAPI({
         operation: 'listingsRestrictions.getListingsRestrictions',
@@ -95,7 +95,7 @@ class SPClient {
 
   async createListing() {
     try {
-      const [listingError, listingItem] = await this.getListingItems();
+      const [listingError, listingItem] = await this.searchCatalogItems();
       if (listingError) throw listingError;
 
       //TODO: if product types length is greater than 1, than user must select the which product type to use
@@ -104,7 +104,7 @@ class SPClient {
         productTypes = [...productTypes, ...item.productTypes];
       }
 
-      const [restrictionError, listingsRestrictions] = await this.getListingRestrictions();
+      const [restrictionError, listingsRestrictions] = await this.getListingsRestrictions();
       if (restrictionError) throw restrictionError;
 
       const [definitionsError, definitionsProductType] = await this.getDefinitionsProductType(productTypes[0].productType);

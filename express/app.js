@@ -31,7 +31,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 // routes
 app.use('/api/ping', require('./routes/ping'));
-app.use('/api/aws', require('./routes/aws'));
+app.use('/api/listing', require('./routes/listing'));
 
 // set the view engine
 app.set('view engine', 'ejs');
